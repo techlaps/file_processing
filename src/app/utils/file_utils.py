@@ -32,3 +32,33 @@ def get_count_from_file(spark, file_type, file_path):
     df_count = df.count()
     print("Exiting out of get_count_from_file function")
     return df_count
+
+
+import pyspark.sql.functions as F
+
+
+def get_filter_count_from_file(spark, file_type, file_path):
+    print("Inside get_count_from_file function")
+
+    df = get_df_from_file(spark, file_type, file_path)
+
+    print()
+    print(" ========= Printing df: ========= ")
+    print(df)
+    print()
+
+    df = df.filter(F.col("first_name").isNotNull())
+
+    df_count = df.count()
+    print("Exiting out of get_count_from_file function")
+    return df_count
+
+
+def null_or_unknown_count(df):
+    print("Inside null_or_unknown_count function")
+    print(" ========================== ")
+    print(df)
+    print(" ========================== ")
+    return df.sample(0.01).filter(
+        F.col('env').isNull() | (F.col('env') == 'Unknown')
+    ).count()
