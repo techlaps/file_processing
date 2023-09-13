@@ -21,7 +21,14 @@ def get_df_from_file(spark, file_type, file_path):
 
 def get_count_from_file(spark, file_type, file_path):
     print("Inside get_count_from_file function")
+
     df = get_df_from_file(spark, file_type, file_path)
+
+    print()
+    print(" ========= Printing df: ========= ")
+    print(df)
+    print()
+
     df_count = df.count()
     print("Exiting out of get_count_from_file function")
     return df_count

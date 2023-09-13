@@ -20,4 +20,3 @@ def test_parse(mock_fetch_net):
 def test_parse():
     with patch('src.app.http_utils.fetch_net', return_value = "def"):
         assert parse() == "def123"
-
